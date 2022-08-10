@@ -4,11 +4,21 @@ import databases
 
 from fastapi import  FastAPI, Request
 from decouple import config
+from configparser import ConfigParser
 
-DATABASE_URL = f"postgresql://{config('DB_USER')}:{config('DB_PASSWORD')}@{config('DB_SERVER')}:{config('DB_PORT')}/{config('DB_NAME')}"
+config_file = "alembic.ini"
+alembic_config = ConfigParser()
+alembic_config.read(config_file)
+
+DATABASE_URL = f"postgresql://{config('DB_USER')}:{config('DB_PASSWORD')}@{config('DB_SERVER')}:{config('DB_PORT')}/{config('DB_NAME')}s"
+alembic_config.set("alembic", "sqlalchemy.url", DATABASE_URL)
+
+with open(config_file, 'w') as configfile:
+    alembic_config.write(configfile)
+
 
 database = databases.Database(DATABASE_URL)
-metadata = sqlalchemy.MetaData()
+metadata = sqlalchemy.MgetaData()
 
 books = sqlalchemy.Table(
     "books",
