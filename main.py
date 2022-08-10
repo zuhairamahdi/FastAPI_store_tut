@@ -18,7 +18,7 @@ with open(config_file, 'w') as configfile:
 
 
 database = databases.Database(DATABASE_URL)
-metadata = sqlalchemy.MgetaData()
+metadata = sqlalchemy.MetaData()
 
 books = sqlalchemy.Table(
     "books",
