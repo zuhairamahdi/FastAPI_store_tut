@@ -10,7 +10,7 @@ config_file = "alembic.ini"
 alembic_config = ConfigParser()
 alembic_config.read(config_file)
 
-DATABASE_URL = f"postgresql://{config('DB_USER')}:{config('DB_PASSWORD')}@{config('DB_SERVER')}:{config('DB_PORT')}/{config('DB_NAME')}s"
+DATABASE_URL = f"postgresql://{config('DB_USER')}:{config('DB_PASSWORD')}@{config('DB_SERVER')}:{config('DB_PORT')}/{config('DB_NAME')}"
 alembic_config.set("alembic", "sqlalchemy.url", DATABASE_URL)
 
 with open(config_file, 'w') as configfile:
